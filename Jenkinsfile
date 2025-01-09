@@ -17,6 +17,13 @@ pipeline
             }
         }
         }
+         stage('deploy to tomcat dev1')    //5 min
+
+        {
+            steps { sshagent (credentials: ['test']) 
+     {
+      sh 'scp -o StrictHostKeyChecking=no /new/target/hello-1.0.war ec2-user@172.31.18.254:/usr/share/tomcat/webapps'
+    } }}
       
     }
 }
